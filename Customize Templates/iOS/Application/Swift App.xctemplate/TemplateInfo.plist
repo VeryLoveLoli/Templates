@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Kind</key>
+	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+	<key>Identifier</key>
+	<string>com.apple.dt.unit.singleViewApplication.swift</string>
+	<key>Ancestors</key>
+	<array>
+		<string>com.apple.dt.unit.applicationBase</string>
+		<string>com.apple.dt.unit.iosBase</string>
+		<string>com.apple.dt.unit.languageChoice.app.iOS</string>
+		<string>com.apple.dt.unit.appLifecycle.iOS</string>
+	</array>
+	<key>Targets</key>
+	<array>
+		<dict>
+			<key>TargetIdentifier</key>
+			<string>com.apple.dt.cocoaTouchApplicationTarget</string>
+			<key>SharedSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME</key>
+				<string>AccentColor</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents</key>
+				<string>YES</string>
+				<key>INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone</key>
+				<string>UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight</string>
+				<key>INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad</key>
+				<string>UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight</string>
+			</dict>
+		</dict>
+	</array>
+	<key>Concrete</key>
+	<true/>
+	<key>Description</key>
+	<string>自定义 Swift 项目</string>
+	<key>SortOrder</key>
+	<integer>0</integer>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>languageChoice</string>
+			<key>Units</key>
+			<dict>
+				<key>Swift</key>
+				<array>
+					<dict>
+						<key>RequiredOptions</key>
+						<dict>
+							<key>userInterface</key>
+							<string>Storyboard</string>
+						</dict>
+						<key>Nodes</key>
+						<array>
+							<string>Base.lproj/LaunchScreen.storyboard</string>
+							<string>AppDelegate.swift:comments</string>
+							<string>AppDelegate.swift:importContent</string>
+							<string>SceneDelegate.swift:comments</string>
+							<string>SceneDelegate.swift:importContent</string>
+							<string>Main.swift:comments</string>
+							<string>Main.swift:importContent</string>
+							<string>Base.lproj/Main.storyboard</string>
+							<string>Info.plist:UIApplicationSceneManifest:UISceneStoryboardFile</string>
+						</array>
+						<key>Definitions</key>
+						<dict>
+							<key>Base.lproj/LaunchScreen.storyboard</key>
+							<dict>
+								<key>Path</key>
+								<string>LaunchScreen.storyboard</string>
+								<key>SortOrder</key>
+								<integer>1</integer>
+							</dict>
+							<key>AppDelegate.swift</key>
+							<dict>
+								<key>SortOrder</key>
+								<integer>2</integer>
+							</dict>
+							<key>AppDelegate.swift:importContent</key>
+							<string>import UIKit
+
+import Print
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+
+    // MARK: - 属性
+    
+    /// 默认
+    static var `default`: AppDelegate? { UIApplication.shared.delegate as? AppDelegate }
+    
+    /// 窗口
+    var window: UIWindow?
+    
+    /// 后台任务
+    var backgroundTask: UIBackgroundTaskIdentifier?
+    
+    // MARK: - 应用 生命周期
+    
+    /**
+     启动
+     */
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -&gt; Bool {
+        
+        /// 启动配置
+        Configuration.launch()
+        
+        /// 注册远程推送（需配置证书和`Capabilities`添加 `Push Notifications`）
+//        registerForRemoteNotifications(application)
+        
+        /// 链接进入
+        linkLaunch(launchOptions)
+        
+        return true
+    }
+    
+    /**
+     活跃
+     */
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        /// 结束后台任务
+        if let task = self.backgroundTask {
+            
+            UIApplication.shared.endBackgroundTask(task)
+        }
+    }
+    
+    /**
+     将不活跃
+     */
+    func applicationWillResignActive(_ application: UIApplication) {
+        
+        /// 开启后台任务
+        UIApplication.shared.beginBackgroundTask {
+            
+            if let task = self.backgroundTask {
+                
+                UIApplication.shared.endBackgroundTask(task)
+            }
+            
+            self.backgroundTask = .invalid
+        }
+    }
+    
+    /**
+     将进入前台
+     */
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        
+    }
+    
+    /**
+     进入后台
+     */
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        
+    }
+
+    // MARK: - 场景会话 生命周期
+    
+    /**
+     场景会话配置
+     */
+    @available(iOS 13.0, *)
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -&gt; UISceneConfiguration {
+        
+        return UISceneConfiguration(name: &quot;Default Configuration&quot;, sessionRole: connectingSceneSession.role)
+    }
+    
+    /**
+     场景会话废弃
+     */
+    @available(iOS 13.0, *)
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set&lt;UISceneSession&gt;) {
+        
+    }
+
+    // MARK: - 远程推送注册
+    
+    /**
+     注册远程推送通知
+     */
+    func registerForRemoteNotifications(_ application: UIApplication) {
+        
+        UNUserNotificationCenter.current().delegate = self
+        
+        /// 获取权限
+        UNUserNotificationCenter.current().getNotificationSettings { setting in
+            
+            Print.debug(setting)
+            
+            switch setting.authorizationStatus {
+            
+            case .authorized:
+                
+                DispatchQueue.main.async {
+                    
+                    /// 注册远程通知
+                    application.registerForRemoteNotifications()
+                }
+                
+            case .notDetermined:
+                
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { bool, error in
+                    
+                    if bool {
+                        
+                        Print.debug(&quot;获取推送权限成功&quot;)
+                        
+                        DispatchQueue.main.async {
+                            
+                            /// 注册远程通知
+                            application.registerForRemoteNotifications()
+                        }
+                    }
+                    else {
+                        
+                        Print.debug(&quot;获取推送权限失败&quot;)
+                    }
+                    
+                    if let error = error {
+                        
+                        Print.error(&quot;推送权限错误：&quot;)
+                        Print.error(error.localizedDescription)
+                    }
+                }
+            default:
+                break
+            }
+        }
+        
+        /// 清除通知数量标记
+        application.applicationIconBadgeNumber = 0
+    }
+    
+    /**
+     远程推送注册成功
+     */
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+    }
+    
+    /**
+     远程推送注册失败
+     */
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+    }
+    
+    // MARK: - UNUserNotificationCenterDelegate
+    
+    /**
+     点击通知设置选项获得通知
+     */
+    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        let _ = notification?.request.content.userInfo
+    }
+    
+    /**
+     点击获得通知
+     */
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -&gt; Void) {
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        let _ = response.notification.request.content.userInfo
+        
+        completionHandler()
+    }
+    
+    /**
+     在前台获得通知
+     */
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&gt; Void) {
+        
+        /// 显示通知
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    // MARK: - 链接进入
+    
+    /**
+     链接进入启动App
+     */
+    func linkLaunch(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        
+        if let url = launchOptions?[.url] as? URL {
+            
+            linkHandler(url)
+        }
+    }
+    
+    /**
+     链接进入
+     */
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -&gt; Bool {
+        
+        linkHandler(url)
+        
+        return true
+    }
+    
+    /**
+     链接进入
+     */
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -&gt; Void) -&gt; Bool {
+        
+        if let url = userActivity.webpageURL {
+            
+            linkHandler(url)
+        }
+        
+        if let url = userActivity.referrerURL, userActivity.referrerURL != userActivity.webpageURL {
+            
+            linkHandler(url)
+        }
+        
+        return true
+    }
+    
+    /**
+     链接处理
+     */
+    func linkHandler(_ url: URL) {
+        
+    }
+}</string>
+							<key>SceneDelegate.swift</key>
+							<dict>
+								<key>SortOrder</key>
+								<integer>3</integer>
+							</dict>
+							<key>SceneDelegate.swift:importContent</key>
+							<string>import UIKit
+
+@available(iOS 13.0, *)
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
+    // MARK: - 属性
+    
+    /**
+     窗口
+     */
+    var window: UIWindow? {
+        
+        didSet {
+            
+            (UIApplication.shared.delegate as? AppDelegate)?.window = window
+        }
+    }
+    
+    // MARK: - 生命周期
+    
+    /**
+     将连接
+     */
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        /// 链接进入
+        linkLaunch(connectionOptions)
+        
+        guard let _ = (scene as? UIWindowScene) else { return }
+    }
+    
+    /**
+     取消连接
+     */
+    func sceneDidDisconnect(_ scene: UIScene) {
+        
+    }
+    
+    /**
+     活跃
+     */
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        
+    }
+    
+    /**
+     将不活跃
+     */
+    func sceneWillResignActive(_ scene: UIScene) {
+        
+    }
+    
+    /**
+     将进入前台
+     */
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        
+    }
+    
+    /**
+     进入后台
+     */
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        
+    }
+    
+    // MARK: - 链接进入
+    
+    /**
+     链接进入启动场景
+     */
+    func linkLaunch(_ connectionOptions: UIScene.ConnectionOptions) {
+        
+        for item in connectionOptions.urlContexts {
+            
+            AppDelegate.default?.linkHandler(item.url)
+        }
+    }
+    
+    /**
+     链接进入
+     */
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        
+        let _ = AppDelegate.default?.application(UIApplication.shared, continue: userActivity, restorationHandler: { restorings in
+            
+        })
+    }
+    
+    /**
+     链接进入
+     */
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set&lt;UIOpenURLContext&gt;) {
+        
+        for item in URLContexts {
+            
+            let _ = AppDelegate.default?.application(UIApplication.shared, open: item.url, options: [:])
+        }
+    }
+}</string>
+							<key>Main.swift</key>
+							<dict>
+								<key>SortOrder</key>
+								<integer>4</integer>
+							</dict>
+							<key>Main.swift:importContent</key>
+							<string>import UIKit
+
+import Print
+import Protocol
+import Extension
+
+import Network
+import JSONValue
+import JSONDecoderExtension
+
+import Prompt
+import DragLoad
+
+/**
+ 主页
+ */
+class Main: VC {
+    
+    // MARK: - StoryboardProtocol
+    
+    // MARK: - 属性
+    
+    // MARK: - 生命周期
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        /// 设置界面样式
+        Global.interfaceStyle = .light
+    }
+    
+    // MARK: - 导航
+    
+    // MARK: - 网络
+    
+    // MARK: - IB 事件
+    
+    // MARK: - 事件
+}</string>
+							<key>Base.lproj/Main.storyboard</key>
+							<dict>
+								<key>Path</key>
+								<string>Main.storyboard</string>
+								<key>SortOrder</key>
+								<integer>5</integer>
+							</dict>
+						</dict>
+						<key>Targets</key>
+						<array>
+							<dict>
+								<key>SharedSettings</key>
+								<dict>
+									<key>INFOPLIST_KEY_UIMainStoryboardFile</key>
+									<string>Main</string>
+									<key>INFOPLIST_KEY_UILaunchStoryboardName</key>
+									<string>LaunchScreen</string>
+								</dict>
+							</dict>
+						</array>
+					</dict>
+					<dict>
+						<key>Nodes</key>
+						<array>
+							<string>配置/Configuration.swift</string>
+							<string>全局/Global.swift</string>
+							<string>接口/HTTP.swift</string>
+							<string>模型/网络响应结果/NetworkResponse.swift</string>
+							<string>基础/NC.swift</string>
+							<string>基础/TB.swift</string>
+							<string>基础/TBC.swift</string>
+							<string>基础/VC.swift</string>
+							<string>基础/TCell.swift</string>
+							<string>基础/TVC.swift</string>
+							<string>基础/CCell.swift</string>
+							<string>基础/CVC.swift</string>
+							<string>通用/提示/AlertVC.storyboard</string>
+							<string>通用/提示/AlertVC.swift:comments</string>
+							<string>通用/提示/AlertVC.swift:importContent</string>
+							<string>模块/我的/MyVC.storyboard</string>
+							<string>模块/我的/MyVC.swift:comments</string>
+							<string>模块/我的/MyVC.swift:importContent</string>
+						</array>
+						<key>Definitions</key>
+						<dict>
+							<key>配置/Configuration.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>配置/Configuration.swift</string>
+								<key>Group</key>
+								<array>
+									<string>配置</string>
+								</array>
+							</dict>
+							<key>全局/Global.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>全局/Global.swift</string>
+								<key>Group</key>
+								<array>
+									<string>全局</string>
+								</array>
+							</dict>
+							<key>接口/HTTP.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>接口/HTTP.swift</string>
+								<key>Group</key>
+								<array>
+									<string>接口</string>
+								</array>
+							</dict>
+							<key>模型/网络响应结果/NetworkResponse.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>模型/网络响应结果/NetworkResponse.swift</string>
+								<key>Group</key>
+								<array>
+									<string>模型</string>
+									<string>网络响应结果</string>
+								</array>
+							</dict>
+							<key>基础/NC.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/NC.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/TB.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/TB.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/TBC.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/TBC.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/VC.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/VC.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/TCell.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/TCell.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/TVC.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/TVC.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/CCell.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/CCell.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/CVC.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/CVC.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>通用/提示/AlertVC.storyboard</key>
+							<dict>
+								<key>Path</key>
+								<string>通用/提示/AlertVC.storyboard</string>
+								<key>Group</key>
+								<array>
+									<string>通用</string>
+									<string>提示</string>
+								</array>
+							</dict>
+							<key>通用/提示/AlertVC.swift</key>
+							<dict>
+								<key>Group</key>
+								<array>
+									<string>通用</string>
+									<string>提示</string>
+								</array>
+							</dict>
+							<key>通用/提示/AlertVC.swift:importContent</key>
+							<string>import UIKit
+
+import Print
+import Protocol
+import Extension
+
+import Network
+import JSONValue
+import JSONDecoderExtension
+
+import Prompt
+import DragLoad
+
+/**
+ 提示
+ */
+class AlertVC: VC {
+    
+    // MARK: - StoryboardProtocol
+    
+    // MARK: - 属性
+    
+    // MARK: - 生命周期
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    // MARK: - 导航
+    
+    // MARK: - 网络
+    
+    // MARK: - IB 事件
+    
+    // MARK: - 事件
+}</string>
+							<key>模块/我的/MyVC.storyboard</key>
+							<dict>
+								<key>Path</key>
+								<string>模块/我的/MyVC.storyboard</string>
+								<key>Group</key>
+								<array>
+									<string>模块</string>
+									<string>我的</string>
+								</array>
+							</dict>
+							<key>模块/我的/MyVC.swift</key>
+							<dict>
+								<key>Group</key>
+								<array>
+									<string>模块</string>
+									<string>我的</string>
+								</array>
+							</dict>
+							<key>模块/我的/MyVC.swift:importContent</key>
+							<string>import UIKit
+
+import Print
+import Protocol
+import Extension
+
+import Network
+import JSONValue
+import JSONDecoderExtension
+
+import Prompt
+import DragLoad
+
+/**
+ 我的
+ */
+class MyVC: VC {
+    
+    // MARK: - StoryboardProtocol
+    
+    // MARK: - 属性
+    
+    // MARK: - 生命周期
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    // MARK: - 导航
+    
+    // MARK: - 网络
+    
+    // MARK: - IB 事件
+    
+    // MARK: - 事件
+}</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Default</key>
+			<string>Swift</string>
+			<key>Values</key>
+			<array>
+				<string>Swift</string>
+			</array>
+			<key>AllowedTypes</key>
+			<dict>
+				<key>Swift</key>
+				<array>
+					<string>public.swift-source</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>userInterface</string>
+			<key>Name</key>
+			<string>Interface:</string>
+			<key>Description</key>
+			<string>The type of user interface.</string>
+			<key>Values</key>
+			<array>
+				<string>Storyboard</string>
+			</array>
+			<key>Default</key>
+			<string>Storyboard</string>
+			<key>Type</key>
+			<string>popup</string>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>appLifecycle</string>
+			<key>Units</key>
+			<dict>
+				<key>Cocoa</key>
+				<array>
+					<dict>
+						<key>Nodes</key>
+						<array>
+							<string>Info.plist:UIApplicationSceneManifest</string>
+						</array>
+						<key>Targets</key>
+						<array>
+							<dict>
+								<key>SharedSettings</key>
+								<dict>
+									<key>INFOPLIST_FILE</key>
+									<string>___PACKAGENAME___/Info.plist</string>
+								</dict>
+							</dict>
+						</array>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>Nodes</key>
+	<array>
+		<string>Assets.xcassets</string>
+	</array>
+	<key>Definitions</key>
+	<dict>
+		<key>Assets.xcassets</key>
+		<dict>
+			<key>Path</key>
+			<string>Assets.xcassets</string>
+			<key>AssetGeneration</key>
+			<array>
+				<dict>
+					<key>Type</key>
+					<string>appicon</string>
+					<key>Name</key>
+					<string>AppIcon</string>
+					<key>Platforms</key>
+					<dict>
+						<key>iOS</key>
+						<string>true</string>
+					</dict>
+				</dict>
+			</array>
+			<key>SortOrder</key>
+			<integer>100</integer>
+		</dict>
+		<key>Base.lproj/LaunchScreen.storyboard</key>
+		<dict>
+			<key>Path</key>
+			<string>LaunchScreen.storyboard</string>
+			<key>SortOrder</key>
+			<integer>101</integer>
+		</dict>
+		<key>Info.plist:UIApplicationSceneManifest</key>
+		<dict>
+			<key>Beginning</key>
+			<string>
+            &lt;key&gt;UIApplicationSceneManifest&lt;/key&gt;
+            &lt;dict&gt;
+                &lt;key&gt;UIApplicationSupportsMultipleScenes&lt;/key&gt;
+                &lt;false/&gt;
+                &lt;key&gt;UISceneConfigurations&lt;/key&gt;
+                &lt;dict&gt;
+                    &lt;key&gt;UIWindowSceneSessionRoleApplication&lt;/key&gt;
+                    &lt;array&gt;
+                        &lt;dict&gt;
+                            &lt;key&gt;UISceneConfigurationName&lt;/key&gt;
+                            &lt;string&gt;Default Configuration&lt;/string&gt;
+                            &lt;key&gt;UISceneDelegateClassName&lt;/key&gt;
+                            &lt;string&gt;___VARIABLE_moduleNamePrefixForClasses:XML___SceneDelegate&lt;/string&gt;
+</string>
+			<key>End</key>
+			<string>
+                        &lt;/dict&gt;
+                    &lt;/array&gt;
+                &lt;/dict&gt;
+            &lt;/dict&gt;
+</string>
+			<key>Indent</key>
+			<integer>2</integer>
+		</dict>
+		<key>Info.plist:UIApplicationSceneManifest:UISceneStoryboardFile</key>
+		<string>
+&lt;key&gt;UISceneStoryboardFile&lt;/key&gt;
+&lt;string&gt;Main&lt;/string&gt;
+</string>
+	</dict>
+	<key>Image</key>
+	<dict>
+		<key>BundleImageName</key>
+		<string>app</string>
+		<key>BundleIdentifier</key>
+		<string>com.apple.dt.IDEKit</string>
+	</dict>
+</dict>
+</plist>
