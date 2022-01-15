@@ -524,6 +524,7 @@ class Main: VC {
 							<string>基础/TCell.swift</string>
 							<string>基础/CVC.swift</string>
 							<string>基础/CCell.swift</string>
+							<string>基础/V.swift</string>
 							<string>通用/提示/AlertVC.storyboard</string>
 							<string>通用/提示/AlertVC.swift:comments</string>
 							<string>通用/提示/AlertVC.swift:importContent</string>
@@ -637,6 +638,15 @@ class Main: VC {
 							<dict>
 								<key>Path</key>
 								<string>基础/CCell.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/V.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/V.swift</string>
 								<key>Group</key>
 								<array>
 									<string>基础</string>
