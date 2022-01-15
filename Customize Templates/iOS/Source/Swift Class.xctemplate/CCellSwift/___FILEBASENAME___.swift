@@ -16,7 +16,7 @@ import DragLoad
 /**
  ___FILEBASENAMEASIDENTIFIER___
  */
-class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_cocoaTouchSubclass___<<#T##数据模型###>> {
+class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_cocoaTouchSubclass___ {
 	
 	// MARK: - XIBProtocol
 	
@@ -38,5 +38,6 @@ class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_cocoaTouchSubclass___<<#T##数
 	*/
 	override func update() {
 		
+        guard let item = source as? <#T##数据模型###> else { return }
 	}
 }

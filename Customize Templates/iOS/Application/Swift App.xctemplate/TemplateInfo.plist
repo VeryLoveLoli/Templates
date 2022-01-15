@@ -520,10 +520,10 @@ class Main: VC {
 							<string>基础/TB.swift</string>
 							<string>基础/TBC.swift</string>
 							<string>基础/VC.swift</string>
-							<string>基础/TCell.swift</string>
 							<string>基础/TVC.swift</string>
-							<string>基础/CCell.swift</string>
+							<string>基础/TCell.swift</string>
 							<string>基础/CVC.swift</string>
+							<string>基础/CCell.swift</string>
 							<string>通用/提示/AlertVC.storyboard</string>
 							<string>通用/提示/AlertVC.swift:comments</string>
 							<string>通用/提示/AlertVC.swift:importContent</string>
@@ -606,15 +606,6 @@ class Main: VC {
 									<string>基础</string>
 								</array>
 							</dict>
-							<key>基础/TCell.swift</key>
-							<dict>
-								<key>Path</key>
-								<string>基础/TCell.swift</string>
-								<key>Group</key>
-								<array>
-									<string>基础</string>
-								</array>
-							</dict>
 							<key>基础/TVC.swift</key>
 							<dict>
 								<key>Path</key>
@@ -624,10 +615,10 @@ class Main: VC {
 									<string>基础</string>
 								</array>
 							</dict>
-							<key>基础/CCell.swift</key>
+							<key>基础/TCell.swift</key>
 							<dict>
 								<key>Path</key>
-								<string>基础/CCell.swift</string>
+								<string>基础/TCell.swift</string>
 								<key>Group</key>
 								<array>
 									<string>基础</string>
@@ -637,6 +628,15 @@ class Main: VC {
 							<dict>
 								<key>Path</key>
 								<string>基础/CVC.swift</string>
+								<key>Group</key>
+								<array>
+									<string>基础</string>
+								</array>
+							</dict>
+							<key>基础/CCell.swift</key>
+							<dict>
+								<key>Path</key>
+								<string>基础/CCell.swift</string>
 								<key>Group</key>
 								<array>
 									<string>基础</string>

@@ -20,15 +20,13 @@ import DragLoad
 
 /**
  列表元件
- 
- 使用范型 `TCell<M>` 无法在 `Storyboard` 上直接关联 需继承指定`M`类型后关联
  */
-class TCell<M>: UITableViewCell, XIBProtocol {
+class TCell: UITableViewCell, XIBProtocol {
     
     // MARK: - 属性
     
     /// 数据源
-    var source: M? {
+    var source: Any? {
         
         didSet {
             

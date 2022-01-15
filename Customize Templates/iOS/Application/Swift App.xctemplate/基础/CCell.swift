@@ -20,15 +20,13 @@ import DragLoad
 
 /**
  集合视图元件
- 
- 使用范型 `CCell<M>` 无法在 `Storyboard` 上直接关联 需继承指定`M`类型后关联
  */
-class CCell<M>: UICollectionViewCell, XIBProtocol {
+class CCell: UICollectionViewCell, XIBProtocol {
     
     // MARK: - 属性
     
     /// 数据源
-    var source: M? {
+    var source: Any? {
         
         didSet {
             

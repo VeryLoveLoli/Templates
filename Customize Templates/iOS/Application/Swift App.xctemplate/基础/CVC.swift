@@ -22,10 +22,8 @@ import CollectionViewFlowLayout
 
 /**
  集合视图控制器
- 
- 使用范型 `CVC<M>` 无法在 `Storyboard` 上直接关联 需继承指定`M`类型后关联
  */
-class CVC<M>: VC, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class CVC: VC, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // MARK: - StoryboardProtocol
     
@@ -35,7 +33,7 @@ class CVC<M>: VC, UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     @IBOutlet var collectionView: UICollectionView?
     
     /// 数据
-    var items: [M] = []
+    var items: [Any] = []
     
     // MARK: - 生命周期
     
@@ -66,8 +64,8 @@ class CVC<M>: VC, UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         
-        (cell as? CCell<M>)?.indexPath = indexPath
-        (cell as? CCell<M>)?.source = item
+        (cell as? CCell)?.indexPath = indexPath
+        (cell as? CCell)?.source = item
         
         return cell
     }

@@ -20,10 +20,8 @@ import DragLoad
 
 /**
  列表视图控制器
- 
- 使用范型 `TVC<M>` 无法在 `Storyboard` 上直接关联 需继承指定`M`类型后关联
  */
-class TVC<M>: VC, UITableViewDelegate, UITableViewDataSource {
+class TVC: VC, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - StoryboardProtocol
     
@@ -32,7 +30,7 @@ class TVC<M>: VC, UITableViewDelegate, UITableViewDataSource {
     /// 列表视图
     @IBOutlet var tableView: UITableView?
     /// 列表项
-    var items: [M] = []
+    var items: [Any] = []
     
     // MARK: - UITableViewDataSource
     
@@ -54,8 +52,8 @@ class TVC<M>: VC, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
-        (cell as? TCell<M>)?.indexPath = indexPath
-        (cell as? TCell<M>)?.source = item
+        (cell as? TCell)?.indexPath = indexPath
+        (cell as? TCell)?.source = item
         
         return cell
     }

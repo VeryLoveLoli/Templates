@@ -18,7 +18,7 @@ import CollectionViewFlowLayout
 /**
  ___FILEBASENAMEASIDENTIFIER___
  */
-class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_cocoaTouchSubclass___<<#T##数据模型###>> {
+class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_cocoaTouchSubclass___ {
 	
 	// MARK: - StoryboardProtocol
 	
