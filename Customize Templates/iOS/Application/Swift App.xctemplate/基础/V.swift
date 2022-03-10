@@ -37,4 +37,12 @@ class V: UIView, XIBProtocol {
     // MARK: - IB 事件
     
 	// MARK: - 事件
+    
+    // MARK: - deinit
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+        Print.debug("\(#function): \(self)")
+    }
 }

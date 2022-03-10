@@ -35,4 +35,12 @@ class TBC: UITabBarController, UITabBarControllerDelegate, StoryboardProtocol {
     }
     
     // MARK: - UITabBarControllerDelegate
+    
+    // MARK: - deinit
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+        Print.debug("\(#function): \(self)")
+    }
 }

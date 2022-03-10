@@ -138,4 +138,12 @@ class VC: UIViewController, StoryboardProtocol, ModalPresentProtocol, Navigation
         
         noNetworkView.isHidden = true
     }
+    
+    // MARK: - deinit
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+        Print.debug("\(#function): \(self)")
+    }
 }

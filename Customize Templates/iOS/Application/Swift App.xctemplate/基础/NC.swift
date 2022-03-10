@@ -71,4 +71,12 @@ class NC: UINavigationController, UINavigationControllerDelegate, StoryboardProt
         
         super.pushViewController(viewController, animated: animated)
     }
+    
+    // MARK: - deinit
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+        Print.debug("\(#function): \(self)")
+    }
 }
