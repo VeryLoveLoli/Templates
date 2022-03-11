@@ -41,6 +41,6 @@ class TBC: UITabBarController, UITabBarControllerDelegate, StoryboardProtocol {
     deinit {
         
         NotificationCenter.default.removeObserver(self)
-        Print.debug("\(#function): \(self)")
+        Print.debug("\(self)")
     }
 }

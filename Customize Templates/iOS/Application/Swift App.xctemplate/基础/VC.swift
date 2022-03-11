@@ -144,6 +144,6 @@ class VC: UIViewController, StoryboardProtocol, ModalPresentProtocol, Navigation
     deinit {
         
         NotificationCenter.default.removeObserver(self)
-        Print.debug("\(#function): \(self)")
+        Print.debug("\(self)")
     }
 }

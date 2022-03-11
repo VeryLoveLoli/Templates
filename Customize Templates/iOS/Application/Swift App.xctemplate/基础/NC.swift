@@ -77,6 +77,6 @@ class NC: UINavigationController, UINavigationControllerDelegate, StoryboardProt
     deinit {
         
         NotificationCenter.default.removeObserver(self)
-        Print.debug("\(#function): \(self)")
+        Print.debug("\(self)")
     }
 }

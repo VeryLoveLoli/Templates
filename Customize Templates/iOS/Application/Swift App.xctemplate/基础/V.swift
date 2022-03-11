@@ -43,6 +43,6 @@ class V: UIView, XIBProtocol {
     deinit {
         
         NotificationCenter.default.removeObserver(self)
-        Print.debug("\(#function): \(self)")
+        Print.debug("\(self)")
     }
 }
